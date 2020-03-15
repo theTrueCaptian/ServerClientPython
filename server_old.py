@@ -4,7 +4,7 @@ import thread
 import signal
 
 # The key is a 16 byte arrray in hex
-#shared_key = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
+shared_key = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
 
 BUFF = 1024
 HOST = '127.0.0.1'
@@ -36,10 +36,8 @@ def broadcast_data (sock, message):
 
 #Call this when received
 def client_handler(clientsocket, addr):
-	#Send client information on the number
-	clientsocket.send('Server>'+str(addr))
 	print "Connected client from: "+str(addr)
-	broadcast_data(clientsocket, "Server> Connected client from: "+str(addr))
+	broadcast_data(clientsocket, "!@!Connected client from: "+str(addr))
 
 	while 1:
 		data = clientsocket.recv(1024)
@@ -65,6 +63,6 @@ while 1:
 	clientsocket, addr = serversocket.accept()
 	CONNECTION_LIST.append(clientsocket)
 	thread.start_new_thread(client_handler, (clientsocket, addr))
-	broadcast_data(clientsocket, "Server> [%s:%s] entered room\n" % addr)
+	broadcast_data(clientsocket, "!@![%s:%s] entered room\n" % addr)
 
 serversocket.close()
