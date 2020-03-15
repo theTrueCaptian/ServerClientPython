@@ -1,0 +1,16 @@
+README
+
+To run the server:
+>python server.py
+
+To run the client without password:
+>python client.py
+
+To run the client with password:
+>python client.py password
+
+Note to test out the encryption and decryption:
+>python testold.py
+
+
+Note: There is a bug; it was working but this small bug stopped it all
